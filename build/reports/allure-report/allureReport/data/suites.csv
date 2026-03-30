@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","8868","fieldsTest()","","Sun Mar 29 13:48:13 MSK 2026","passed","Sun Mar 29 13:48:22 MSK 2026","","FormFieldsTest","FormFieldsTest","fieldsTest"
