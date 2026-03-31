@@ -1,5 +1,5 @@
 # Form Fields Autotest
-Проект содержит автоматизированный тест формы на сайте [practice-automation.com](https://practice-automation.com/form-fields/) с использованием Selenium и JUnit5
+Проект содержит автоматизированный тест формы на сайте [practice-automation.com](https://practice-automation.com/form-fields/) с использованием Selenium и JUnit5, а также два тест-кейса в соответствии с ТЗ
 
 ## 📋 Содержание
 
@@ -54,3 +54,17 @@
 
 
 ## Негативный тест-кейс по веб-форме
+
+### SQL-инъекция через поле Message
+
+№ | Шаг | Ожидаемый результат
+|-|------------------------|--------|
+1 |	Открыть страницу формы | Форма отображена корректно
+2 |	В поле Name ввести: Test | Поле принимает значение
+3 |	В поле Password ввести: 123 | Поле принимает значение
+4 |	В списке "What is your favorite drink?" выбрать: Coffee, Milk | Чекбоксы Coffee и Milk отмечен
+5 | В списке "What is your favorite color?" выбрать: Yellow | Чекбокс Yellow отмечен
+6 | В дропдауне "Do you like automation?" выбрать: Yes | В дропдауне выбран вариант Yes 
+7 |	В поле Email ввести test@example.com | Поле принимает значение
+8 |	В поле Message ввести строку: '; DROP TABLE users; --	| Поле принимает значение
+9 |	Нажать Submit	| Форма НЕ должна отправляться (появляется ошибка валидации) ИЛИ если форма отправляется — alert с текстом "Message received!" НЕ должен появляться
