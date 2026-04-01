@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="FormFieldsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-03-30T19:16:50" hostname="TOPOLM" time="7.946">
+<testsuite name="FormFieldsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-01T15:39:33" hostname="TOPOLM" time="8.677">
   <properties/>
-  <testcase name="fieldsTest()" classname="FormFieldsTest" time="7.946"/>
-  <system-out><![CDATA[22:16:50.572 [Test worker] DEBUG io.github.bonigarcia.wdm.WebDriverManager -- Using WebDriverManager 5.9.2
-22:16:51.505 [Test worker] DEBUG io.github.bonigarcia.wdm.cache.ResolutionCache -- Resolution chrome=146 in cache (valid until 23:16:15 30/03/2026 MSK)
-22:16:51.508 [Test worker] DEBUG io.github.bonigarcia.wdm.cache.ResolutionCache -- Resolution chrome146=146.0.7680.165 in cache (valid until 20:21:40 31/03/2026 MSK)
-22:16:51.511 [Test worker] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 146.0.7680.165 (resolved driver for Chrome 146)
-22:16:51.606 [Test worker] DEBUG io.github.bonigarcia.wdm.WebDriverManager -- Driver chromedriver 146.0.7680.165 found in cache
-22:16:51.608 [Test worker] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as C:\Users\artem\.cache\selenium\chromedriver\win64\146.0.7680.165\chromedriver.exe
+  <testcase name="fieldsTest()" classname="FormFieldsTest" time="8.677"/>
+  <system-out><![CDATA[18:39:34.090 [Test worker] DEBUG io.github.bonigarcia.wdm.WebDriverManager -- Using WebDriverManager 5.9.2
+18:39:35.140 [Test worker] DEBUG io.github.bonigarcia.wdm.cache.ResolutionCache -- Resolution chrome=146 in cache (valid until 19:33:06 01/04/2026 MSK)
+18:39:35.143 [Test worker] DEBUG io.github.bonigarcia.wdm.cache.ResolutionCache -- Resolution chrome146=146.0.7680.165 in cache (valid until 18:33:06 02/04/2026 MSK)
+18:39:35.146 [Test worker] INFO io.github.bonigarcia.wdm.WebDriverManager -- Using chromedriver 146.0.7680.165 (resolved driver for Chrome 146)
+18:39:35.231 [Test worker] DEBUG io.github.bonigarcia.wdm.WebDriverManager -- Driver chromedriver 146.0.7680.165 found in cache
+18:39:35.233 [Test worker] INFO io.github.bonigarcia.wdm.WebDriverManager -- Exporting webdriver.chrome.driver as C:\Users\artem\.cache\selenium\chromedriver\win64\146.0.7680.165\chromedriver.exe
 ]]></system-out>
-  <system-err><![CDATA[мар. 30, 2026 10:16:54 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+  <system-err><![CDATA[апр. 01, 2026 6:39:38 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find an exact match for CDP version 146, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 146
-мар. 30, 2026 10:16:58 PM org.openqa.selenium.remote.http.WebSocket$Listener onError
+апр. 01, 2026 6:39:42 PM org.openqa.selenium.remote.http.WebSocket$Listener onError
 WARNING: Connection reset
 java.net.SocketException: Connection reset
 	at java.base/sun.nio.ch.SocketChannelImpl.throwConnectionReset(SocketChannelImpl.java:394)
