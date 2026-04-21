@@ -21,6 +21,19 @@ abstract public class BaseSeleniumTest {
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
         options.addArguments("--remote-allow-origins=*");
 
+        String isCI = System.getenv("CI");
+        String headless = System.getenv("HEADLESS");
+
+        if ("true".equalsIgnoreCase(headless) || "true".equalsIgnoreCase(isCI)) {
+            options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--disable-extensions");
+            options.addArguments("--disable-setuid-sandbox");
+        }
+
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
