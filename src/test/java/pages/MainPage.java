@@ -1,7 +1,9 @@
 package pages;
 
 import core.BaseSeleniumPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -50,27 +52,52 @@ public class MainPage extends BaseSeleniumPage {
 
     public MainPage() {
         driver.get("https://practice-automation.com/form-fields/");
+        closeCookieBanner();
         PageFactory.initElements(driver, this);
+    }
+    private void closeCookieBanner() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement acceptButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[contains(text(), 'Accept')]")
+            ));
+            acceptButton.click();
+        } catch (TimeoutException e) {
+            // Баннера нет — ничего не делаем
+        }
     }
 
     public MainPage fillFields(String nameValue, String passwordValue, String emailValue) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOf(nameField));
+        wait.until(ExpectedConditions.elementToBeClickable(nameField));
         nameField.sendKeys(nameValue);
+
+        wait.until(ExpectedConditions.visibilityOf(nameField));
+        wait.until(ExpectedConditions.elementToBeClickable(nameField));
         passwordField.sendKeys(passwordValue);
 
+        wait.until(ExpectedConditions.elementToBeClickable(milkCheckbox));
         milkCheckbox.click();
+        wait.until(ExpectedConditions.elementToBeClickable(coffeeCheckbox));
         coffeeCheckbox.click();
 
         long headerHeight = header.getSize().getHeight();
         scrollToElement(yellowCheckbox, headerHeight);
 
-        WebDriverWait waitYellowCheckbox = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitYellowCheckbox.until(ExpectedConditions.elementToBeClickable(yellowCheckbox));
+
+        wait.until(ExpectedConditions.elementToBeClickable(yellowCheckbox));
 
         yellowCheckbox.click();
 
+        wait.until(ExpectedConditions.elementToBeClickable(dropdown));
         dropdown.click();
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownValue));
         dropdownValue.click();
 
+        wait.until(ExpectedConditions.visibilityOf(emailField));
+        wait.until(ExpectedConditions.elementToBeClickable(emailField));
         emailField.sendKeys(emailValue);
 
         String longestName = "";
@@ -81,14 +108,15 @@ public class MainPage extends BaseSeleniumPage {
             if (currentName.length() > longestName.length())
                 longestName = currentName;
         }
-
+        wait.until(ExpectedConditions.visibilityOf(messageField));
+        wait.until(ExpectedConditions.elementToBeClickable(messageField));
         messageField.sendKeys("Longest name of instrument - " + longestName
                 + "\nCount of instruments - " + instruments.size());
 
         scrollToElement(submitButton, headerHeight);
 
-        WebDriverWait waitSubmitButton = new WebDriverWait(driver, Duration.ofSeconds(10));
-        waitSubmitButton.until(ExpectedConditions.elementToBeClickable(submitButton));
+
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
 
         submitButton.click();
 
