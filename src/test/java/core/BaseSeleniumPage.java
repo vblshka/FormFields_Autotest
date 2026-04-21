@@ -1,3 +1,5 @@
+package core;
+
 import org.openqa.selenium.WebDriver;
 
 abstract public class BaseSeleniumPage {

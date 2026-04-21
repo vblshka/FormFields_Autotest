@@ -1,3 +1,4 @@
+import core.BaseSeleniumTest;
 import io.qameta.allure.Allure;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -5,6 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.MainPage;
+import pages.TestListener;
+
 import java.time.Duration;
 
 @ExtendWith(TestListener.class)
