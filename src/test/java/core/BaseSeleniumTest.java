@@ -43,7 +43,6 @@ abstract public class BaseSeleniumTest {
 
     @AfterEach
     public void tearDown() {
-        driver.close();
         driver.quit();
     }
 }

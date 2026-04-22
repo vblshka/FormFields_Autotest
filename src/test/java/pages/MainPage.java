@@ -58,44 +58,69 @@ public class MainPage extends BaseSeleniumPage {
     private void closeCookieBanner() {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            WebElement acceptButton = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(text(), 'Accept')]")
-            ));
-            acceptButton.click();
-        } catch (TimeoutException e) {
+            // Пробуем разные варианты кнопок
+            By[] acceptButtons = {
+                    By.xpath("//button[contains(text(), 'Accept')]"),
+                    By.xpath("//button[contains(text(), 'OK')]"),
+                    By.xpath("//button[contains(text(), 'Agree')]"),
+                    By.xpath("//button[contains(text(), 'Got it')]"),
+                    By.cssSelector(".cookie-accept"),
+                    By.cssSelector(".cookie-consent button")
+            };
+
+            for (By locator : acceptButtons) {
+                try {
+                    WebElement acceptButton = wait.until(ExpectedConditions.elementToBeClickable(locator));
+                    acceptButton.click();
+                    System.out.println("Cookie banner closed");
+                    break;
+                } catch (TimeoutException ignored) {
+                    // Пробуем следующий селектор
+                }
+            }
+        } catch (Exception e) {
             // Баннера нет — ничего не делаем
+            System.out.println("No cookie banner found");
         }
     }
 
     public MainPage fillFields(String nameValue, String passwordValue, String emailValue) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOf(nameField));
-        wait.until(ExpectedConditions.elementToBeClickable(nameField));
+//        wait.until(ExpectedConditions.visibilityOf(nameField));
+//        wait.until(ExpectedConditions.elementToBeClickable(nameField));
+        logElementState(nameField, "nameField");
         nameField.sendKeys(nameValue);
 
+        logElementState(passwordField, "passwordField");
         wait.until(ExpectedConditions.visibilityOf(nameField));
         wait.until(ExpectedConditions.elementToBeClickable(nameField));
         passwordField.sendKeys(passwordValue);
 
+        logElementState(milkCheckbox, "milkcheckbox");
         wait.until(ExpectedConditions.elementToBeClickable(milkCheckbox));
-        milkCheckbox.click();
+        safeClick(milkCheckbox);
+
+        logElementState(coffeeCheckbox, "coffeecheckbox");
         wait.until(ExpectedConditions.elementToBeClickable(coffeeCheckbox));
-        coffeeCheckbox.click();
+        safeClick(coffeeCheckbox);
 
         long headerHeight = header.getSize().getHeight();
         scrollToElement(yellowCheckbox, headerHeight);
 
-
+        logElementState(yellowCheckbox, "yellowcheckbox");
         wait.until(ExpectedConditions.elementToBeClickable(yellowCheckbox));
+        safeClick(yellowCheckbox);
 
-        yellowCheckbox.click();
-
+        logElementState(dropdown, "dropdown");
         wait.until(ExpectedConditions.elementToBeClickable(dropdown));
-        dropdown.click();
-        wait.until(ExpectedConditions.elementToBeClickable(dropdownValue));
-        dropdownValue.click();
+        safeClick(dropdown);
 
+        logElementState(dropdownValue, "dropdownvalue");
+        wait.until(ExpectedConditions.elementToBeClickable(dropdownValue));
+        safeClick(dropdownValue);
+
+        logElementState(emailField, "emailfield");
         wait.until(ExpectedConditions.visibilityOf(emailField));
         wait.until(ExpectedConditions.elementToBeClickable(emailField));
         emailField.sendKeys(emailValue);
@@ -108,6 +133,8 @@ public class MainPage extends BaseSeleniumPage {
             if (currentName.length() > longestName.length())
                 longestName = currentName;
         }
+
+        logElementState(messageField, "messagefield");
         wait.until(ExpectedConditions.visibilityOf(messageField));
         wait.until(ExpectedConditions.elementToBeClickable(messageField));
         messageField.sendKeys("Longest name of instrument - " + longestName
@@ -115,10 +142,9 @@ public class MainPage extends BaseSeleniumPage {
 
         scrollToElement(submitButton, headerHeight);
 
-
+        logElementState(submitButton, "submit");
         wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-
-        submitButton.click();
+        safeClick(submitButton);
 
         return this;
     }
@@ -127,5 +153,13 @@ public class MainPage extends BaseSeleniumPage {
         ((JavascriptExecutor) driver)
                 .executeScript("window.scrollTo(0, arguments[0].getBoundingClientRect().top " +
                         "+ window.pageYOffset - arguments[1] - 20);", element, headerHeight);
+    }
+
+    public void logElementState(WebElement element, String name) {
+        System.out.println("--- " + name + " ---");
+        System.out.println("isDisplayed: " + element.isDisplayed());
+        System.out.println("isEnabled: " + element.isEnabled());
+        System.out.println("Location: " + element.getLocation());
+        System.out.println("Size: " + element.getSize());
     }
 }

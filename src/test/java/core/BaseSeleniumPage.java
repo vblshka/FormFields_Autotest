@@ -19,6 +19,7 @@ abstract public class BaseSeleniumPage {
 
     public void safeClick(WebElement element) {
         try {
+            System.out.println("Attempting to click on element: " + element);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
